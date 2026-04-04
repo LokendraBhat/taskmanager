@@ -24,3 +24,12 @@ Organization Name (eg, company) [Internet Widgits Pty Ltd]:
 Organizational Unit Name (eg, section) []:
 Common Name (e.g. server FQDN or YOUR name) []:
 Email Address []:
+
+> sudo mv nginx.conf /etc/nginx/conf.d/taskmanager.conf
+
+> sudo nginx -t
+> sudo nginx -s reload
+
+> sudo vi /etc/hosts
+  | Add the following line to the end of the file:
+  | 127.0.0.1 taskmanager.local.com
