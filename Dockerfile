@@ -19,7 +19,7 @@ RUN adduser -D -u 1000 appuser
 WORKDIR /home/appuser
 
 COPY --from=builder --chown=appuser:appuser /app/main .
-COPY --from=builder --chown=appuser:appuser /app/web/templates .
+COPY --from=builder --chown=appuser:appuser /app/web ./web/
 
 USER appuser
 

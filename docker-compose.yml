@@ -6,10 +6,7 @@ services:
     volumes:
       - .:/workspaces/app:cached
     working_dir: /workspaces/app
-    environment:
-      - DB_URL=postgres://user:pass@db:5432/mydb?sslmode=disable
-      - DEFAULT_USER=admin
-      - DEFAULT_PASS=admin
+    env_file: .env
     ports:
       - "8080:8080"
     depends_on:
@@ -19,10 +16,7 @@ services:
   db:
     image: postgres:17-alpine
     restart: always
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: mydb
+    env_file: .env
     ports:
       - "54321:5432"
     healthcheck:
@@ -33,7 +27,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Auto-run your schema on first startup
-      - ../migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
