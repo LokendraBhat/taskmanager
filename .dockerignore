@@ -1,0 +1,53 @@
+# --- Version Control ---
+.git
+.gitignore
+.gitattributes
+
+# --- Go Specifics ---
+# Exclude the binary if you build it locally
+*.exe
+*.bin
+main
+
+# --- Documentation ---
+README.md
+*.md
+
+# --- Docker ---
+docker/Dockerfile
+docker/docker-compose.yml
+.dockerignore
+
+# --- IDE ---
+.vscode/
+.idea/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+# Exclude the vendor folder if you use modules (Docker will download them)
+vendor/
+
+# --- Development Environment ---
+.devcontainer/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Docker & CI/CD ---
+docker/docker-compose.yaml
+docker/docker-compose.override.yaml
+docker/Dockerfile
+.dockerignore
+.github/
+.gitlab-ci.yml
+
+# --- Local Secrets & Config ---
+.env
+*.local
+auth.json
+
+# --- OS Specifics ---
+.DS_Store
+Thumbs.db

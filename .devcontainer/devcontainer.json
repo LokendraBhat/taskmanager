@@ -1,0 +1,27 @@
+{
+  "name": "Go & Postgres Dev",
+  "dockerComposeFile": "../docker/docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/app",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {},
+    "ghcr.io/devcontainers/features/common-utils:1": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "ckotzbauer.gocover-viewer",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
