@@ -2,15 +2,18 @@ provider "vagrant" {
  
 }
 
-resource "vagrant_vm" "my_vagrant_vm" {
+resource "vagrant_vm" "vagrant_vm_alma" {
   env = {
-    # force terraform to re-run vagrant if the Vagrantfile changes
-    VAGRANTFILE_HASH = md5(file(var.vfilename)),
+    VAGRANTFILE_HASH = md5(file(var.vfile_alma))
   }
-  get_ports = true
-  id = 101
-  vagrantfile_dir=/home/lokendra/vagrant
-  # other
-  # name="abc"
-  # env=
+  get_ports       = true
+  vagrantfile_dir = "/home/lokendra/vagrant/alma"
+}
+
+resource "vagrant_vm" "vagrant_vm_debian" {
+  env = {
+    VAGRANTFILE_HASH = md5(file(var.vfile_debian))
+  }
+  get_ports       = true
+  vagrantfile_dir = "/home/lokendra/vagrant/debian"
 }

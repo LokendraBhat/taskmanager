@@ -51,3 +51,6 @@ auth.json
 # --- OS Specifics ---
 .DS_Store
 Thumbs.db
+docs/
+terraform/
+ansible/
