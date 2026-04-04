@@ -1,0 +1,44 @@
+- name: Install prerequisites
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install prerequisites (RedHat)
+      dnf:
+        name: [curl, bind-utils, ca-certificates]
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install prerequisites (Debian)
+      apt:
+        name: [curl, ca-certificates]
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Disable SELinux (runtime)
+      shell: setenforce 0
+      ignore_errors: yes
+      when: ansible_os_family == "RedHat"
+
+    - name: Disable SELinux (persistent)
+      replace:
+        path: /etc/selinux/config
+        regexp: '^SELINUX=.*'
+        replace: 'SELINUX=disabled'
+      when: ansible_os_family == "RedHat"
+
+    - name: Disable firewalld (RedHat)
+      systemd:
+        name: firewalld
+        state: stopped
+        enabled: no
+      ignore_errors: yes
+      when: ansible_os_family == "RedHat"
+
+    - name: Disable ufw (Debian)
+      systemd:
+        name: ufw
+        state: stopped
+        enabled: no
+      ignore_errors: yes
+      when: ansible_os_family == "Debian"

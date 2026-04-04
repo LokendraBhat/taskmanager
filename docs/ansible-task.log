@@ -1,0 +1,212 @@
+❯ ansible-playbook -i inventory.yml  update-install.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+PLAY [Install prerequisites] **************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************
+[WARNING]: Platform linux on host vm_alma is using the discovered Python interpreter at /usr/bin/python3.9, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_alma]
+[WARNING]: Platform linux on host vm_debian is using the discovered Python interpreter at /usr/bin/python3.11, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_debian]
+
+TASK [Install prerequisites (RedHat)] *****************************************************************************************
+skipping: [vm_debian]
+changed: [vm_alma]
+
+TASK [Install prerequisites (Debian)] *****************************************************************************************
+skipping: [vm_alma]
+fatal: [vm_debian]: FAILED! => {"changed": false, "msg": "No package matching 'bind-utils' is available"}
+
+TASK [Disable SELinux (runtime)] **********************************************************************************************
+changed: [vm_alma]
+
+TASK [Disable SELinux (persistent)] *******************************************************************************************
+changed: [vm_alma]
+
+TASK [Disable firewalld (RedHat)] *********************************************************************************************
+fatal: [vm_alma]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+
+TASK [Disable ufw (Debian)] ***************************************************************************************************
+skipping: [vm_alma]
+
+PLAY RECAP ********************************************************************************************************************
+vm_alma                    : ok=5    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=1   
+vm_debian                  : ok=1    changed=0    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+
+
+
+❯ ansible-playbook -i inventory.yml  update-install.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+PLAY [Install prerequisites] **************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************
+[WARNING]: Platform linux on host vm_debian is using the discovered Python interpreter at /usr/bin/python3.11, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_debian]
+[WARNING]: Platform linux on host vm_alma is using the discovered Python interpreter at /usr/bin/python3.9, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_alma]
+
+TASK [Install prerequisites (RedHat)] *****************************************************************************************
+skipping: [vm_debian]
+ok: [vm_alma]
+
+TASK [Install prerequisites (Debian)] *****************************************************************************************
+skipping: [vm_alma]
+changed: [vm_debian]
+
+TASK [Disable SELinux (runtime)] **********************************************************************************************
+skipping: [vm_debian]
+changed: [vm_alma]
+
+TASK [Disable SELinux (persistent)] *******************************************************************************************
+skipping: [vm_debian]
+ok: [vm_alma]
+
+TASK [Disable firewalld (RedHat)] *********************************************************************************************
+skipping: [vm_debian]
+fatal: [vm_alma]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+
+TASK [Disable ufw (Debian)] ***************************************************************************************************
+skipping: [vm_alma]
+fatal: [vm_debian]: FAILED! => {"changed": false, "msg": "Could not find the requested service ufw: host"}
+...ignoring
+
+PLAY RECAP ********************************************************************************************************************
+vm_alma                    : ok=5    changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=1   
+vm_debian                  : ok=3    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=1   
+
+
+
+
+
+ansible-playbook -i inventory.yml  deploy.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+PLAY [Deploy crud-api] ********************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************
+[WARNING]: Platform linux on host vm_debian is using the discovered Python interpreter at /usr/bin/python3.11, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_debian]
+[WARNING]: Platform linux on host vm_alma is using the discovered Python interpreter at /usr/bin/python3.9, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_alma]
+
+TASK [Add Docker repo for AlmaLinux] ******************************************************************************************
+skipping: [vm_debian]
+changed: [vm_alma]
+
+TASK [Install Docker in AlmaLinux] ********************************************************************************************
+skipping: [vm_debian]
+
+
+
+changed: [vm_alma]
+
+TASK [Add Docker GPG key (Debian)] ********************************************************************************************
+skipping: [vm_alma]
+fatal: [vm_debian]: FAILED! => {"changed": true, "cmd": "install -m 0755 -d /etc/apt/keyrings\ncurl -fsSL https://download.docker.com/linux/debian/gpg  | gpg --dearmor -o /etc/apt/keyrings/docker.gpg\nchmod a+r /etc/apt/keyrings/docker.gpg\n", "delta": "0:00:00.314368", "end": "2026-04-04 16:03:44.929990", "msg": "non-zero return code", "rc": 1, "start": "2026-04-04 16:03:44.615622", "stderr": "/bin/sh: 2: gpg: not found\ncurl: (23) Failed writing body\nchmod: cannot access '/etc/apt/keyrings/docker.gpg': No such file or directory", "stderr_lines": ["/bin/sh: 2: gpg: not found", "curl: (23) Failed writing body", "chmod: cannot access '/etc/apt/keyrings/docker.gpg': No such file or directory"], "stdout": "", "stdout_lines": []}
+
+TASK [Add Docker apt repo (Debian)] *******************************************************************************************
+skipping: [vm_alma]
+
+TASK [Install Docker (Debian)] ************************************************************************************************
+skipping: [vm_alma]
+
+TASK [Start and enable Docker] ************************************************************************************************
+changed: [vm_alma]
+
+TASK [Create app directory] ***************************************************************************************************
+changed: [vm_alma]
+
+TASK [Copy docker-compose.yml] ************************************************************************************************
+changed: [vm_alma]
+
+TASK [Copy migrations] ********************************************************************************************************
+changed: [vm_alma]
+
+TASK [Deploy application] *****************************************************************************************************
+changed: [vm_alma]
+
+PLAY RECAP ********************************************************************************************************************
+vm_alma                    : ok=8    changed=7    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+vm_debian                  : ok=1    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+
+❯ 
+❯ 
+❯ 
+❯ ansible-playbook -i inventory.yml  deploy.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+PLAY [Deploy crud-api] ********************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************
+[WARNING]: Platform linux on host vm_debian is using the discovered Python interpreter at /usr/bin/python3.11, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_debian]
+[WARNING]: Platform linux on host vm_alma is using the discovered Python interpreter at /usr/bin/python3.9, but future
+installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vm_alma]
+
+TASK [Add Docker repo for AlmaLinux] ******************************************************************************************
+skipping: [vm_debian]
+ok: [vm_alma]
+
+TASK [Install Docker in AlmaLinux] ********************************************************************************************
+skipping: [vm_debian]
+ok: [vm_alma]
+
+TASK [Create keyrings directory (Debian)] *************************************************************************************
+skipping: [vm_alma]
+ok: [vm_debian]
+
+TASK [Download Docker GPG key (Debian)] ***************************************************************************************
+skipping: [vm_alma]
+changed: [vm_debian]
+
+TASK [Add Docker apt repo (Debian)] *******************************************************************************************
+skipping: [vm_alma]
+changed: [vm_debian]
+
+TASK [Install Docker (Debian)] ************************************************************************************************
+skipping: [vm_alma]
+changed: [vm_debian]
+
+TASK [Start and enable Docker] ************************************************************************************************
+ok: [vm_debian]
+ok: [vm_alma]
+
+TASK [Create app directory] ***************************************************************************************************
+changed: [vm_debian]
+ok: [vm_alma]
+
+TASK [Copy docker-compose.yml] ************************************************************************************************
+changed: [vm_debian]
+ok: [vm_alma]
+
+TASK [Copy migrations] ********************************************************************************************************
+changed: [vm_debian]
+ok: [vm_alma]
+
+TASK [Deploy application] *****************************************************************************************************
+changed: [vm_alma]
+changed: [vm_debian]
+
+PLAY RECAP ********************************************************************************************************************
+vm_alma                    : ok=8    changed=1    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+vm_debian                  : ok=10   changed=7    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+

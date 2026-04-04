@@ -163,6 +163,7 @@ Ctrl + Shift + P → Reopen in Container
 ## 🚀 Deployment
 
 ### 1. Provision Infrastructure (Terraform)
+Ref: https://registry.terraform.io/providers/bmatcuk/vagrant/latest/docs
 
 ```bash
 cd terraform
@@ -172,66 +173,50 @@ terraform apply
 
 ---
 
-### 2. Configure Server (Ansible)
+### 2. Configure Server & Deploy (Ansible)
+
+Ref: [Debian](https://docs.docker.com/engine/install/debian/) and [AlmaLinux](https://docs.docker.com/engine/install/centos/)
 
 ```bash
 cd ansible
-ansible-playbook -i inventory playbook.yml
+
+# Step 1 — install curl, ca-certificates, gnupg on target hosts
+ansible-playbook -i inventory.yml update-install.yml
+
+# Step 2 — install Docker, copy compose files, start the app
+ansible-playbook -i inventory.yml deploy.yml
 ```
+
+Both playbooks handle **Debian** (apt) and **RedHat / AlmaLinux** (dnf) automatically via `ansible_os_family`.
+
+The deploy strategy pulls the pre-built image from DockerHub — only `docker-compose.yml` and `migrations/` are transferred to each server, making it reproducible on any new host without rebuilding.
 
 ---
 
 ### 🔄 Deployment Flow
 
-```
-Terraform → Provision server
+```text
+Terraform → Provision VMs
         ↓
-Ansible → Install dependencies
+Ansible (update-install.yml)
         ↓
-Ansible → Deploy Docker app
-        ↓
-Application runs
+Ansible (deploy.yml)
+        ↓        
+Application running on :8080
 ```
 
 ---
 
 ## 🔧 Cross-Platform Support
 
-Supports multiple Linux distributions:
-
-* Debian / Ubuntu (APT)
-* RedHat / CentOS (YUM)
-
----
-
-## 🌟 Future Improvements
-
-* JWT-based authentication
-* RESTful API redesign
-* Pagination & filtering
-* Task deadlines & reminders
-* Real-time updates (WebSockets)
-* CI/CD pipeline (GitHub Actions)
+| Playbook | Debian / Ubuntu | RedHat / AlmaLinux |
+| --- | --- | --- |
+| `update-install.yml` | apt | dnf |
+| `deploy.yml` | apt + Docker GPG key | dnf + Docker CE repo |
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a new branch
-3. Submit a pull request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
+## 👨‍💻 Lokendra Bhat
 
 Built with Go for learning and practical DevOps integration.
 

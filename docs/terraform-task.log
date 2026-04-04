@@ -1,0 +1,198 @@
+❯ terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding bmatcuk/vagrant versions matching "~> 4.0.0"...
+- Installing bmatcuk/vagrant v4.0.0...
+- Installed bmatcuk/vagrant v4.0.0 (self-signed, key ID 77AF9238E6DE2547)
+
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+
+❯ terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # vagrant_vm.vagrant_vm_alma will be created
+  + resource "vagrant_vm" "vagrant_vm_alma" {
+      + env             = {
+          + "VAGRANTFILE_HASH" = "b52087dde088543f11221c864b32626b"
+        }
+      + get_ports       = true
+      + id              = (known after apply)
+      + machine_names   = (known after apply)
+      + ports           = (known after apply)
+      + ssh_config      = (known after apply)
+      + vagrantfile_dir = "/home/lokendra/vagrant/alma"
+    }
+
+  # vagrant_vm.vagrant_vm_debian will be created
+  + resource "vagrant_vm" "vagrant_vm_debian" {
+      + env             = {
+          + "VAGRANTFILE_HASH" = "f933b0f82f07cacde37867ac9472fd58"
+        }
+      + get_ports       = true
+      + id              = (known after apply)
+      + machine_names   = (known after apply)
+      + ports           = (known after apply)
+      + ssh_config      = (known after apply)
+      + vagrantfile_dir = "/home/lokendra/vagrant/debian"
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run
+"terraform apply" now.
+
+
+❯ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # vagrant_vm.vagrant_vm_alma will be created
+  + resource "vagrant_vm" "vagrant_vm_alma" {
+      + env             = {
+          + "VAGRANTFILE_HASH" = "b52087dde088543f11221c864b32626b"
+        }
+      + get_ports       = true
+      + id              = (known after apply)
+      + machine_names   = (known after apply)
+      + ports           = (known after apply)
+      + ssh_config      = (known after apply)
+      + vagrantfile_dir = "/home/lokendra/vagrant/alma"
+    }
+
+  # vagrant_vm.vagrant_vm_debian will be created
+  + resource "vagrant_vm" "vagrant_vm_debian" {
+      + env             = {
+          + "VAGRANTFILE_HASH" = "f933b0f82f07cacde37867ac9472fd58"
+        }
+      + get_ports       = true
+      + id              = (known after apply)
+      + machine_names   = (known after apply)
+      + ports           = (known after apply)
+      + ssh_config      = (known after apply)
+      + vagrantfile_dir = "/home/lokendra/vagrant/debian"
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+vagrant_vm.vagrant_vm_alma: Creating...
+vagrant_vm.vagrant_vm_debian: Creating...
+vagrant_vm.vagrant_vm_alma: Still creating... [10s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [30s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [40s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [50s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m10s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m30s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m40s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [1m50s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [1m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m10s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m30s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m40s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [2m50s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [2m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m10s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m30s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m40s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [3m50s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [3m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m10s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m30s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m40s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [4m50s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [4m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [5m0s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [5m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [5m20s elapsed]
+vagrant_vm.vagrant_vm_debian: Still creating... [5m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m30s elapsed]
+vagrant_vm.vagrant_vm_debian: Creation complete after 5m37s [id=vagrant:debian]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [5m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m10s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m20s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m30s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m40s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [6m50s elapsed]
+vagrant_vm.vagrant_vm_alma: Still creating... [7m0s elapsed]
+vagrant_vm.vagrant_vm_alma: Creation complete after 7m8s [id=vagrant:alma]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+❯ terraform state list
+vagrant_vm.vagrant_vm_alma
+vagrant_vm.vagrant_vm_debian

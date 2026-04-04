@@ -1,0 +1,83 @@
+- name: Deploy crud-api
+  hosts: all
+  become: yes
+  vars:
+    playbook_dir: "{{ ansible_playbook_dir }}"
+    app_dir: /app
+
+  tasks:
+    # Docker install - AlmaLinux
+    - name: Add Docker repo for AlmaLinux
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Docker in AlmaLinux
+      dnf:
+        name: [docker-ce, docker-ce-cli, containerd.io, docker-compose-plugin]
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    # Docker install - Debian
+    - name: Create keyrings directory (Debian)
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+      when: ansible_os_family == "Debian"
+
+    - name: Download Docker GPG key (Debian)
+      get_url:
+        url: https://download.docker.com/linux/{{ 'ubuntu' if ansible_distribution == 'Ubuntu' else 'debian' }}/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+      when: ansible_os_family == "Debian"
+
+    - name: Add Docker apt repo (Debian)
+      copy:
+        dest: /etc/apt/sources.list.d/docker.sources
+        content: |
+          Types: deb
+          URIs: https://download.docker.com/linux/{{ 'ubuntu' if ansible_distribution == 'Ubuntu' else 'debian' }}
+          Suites: {{ ansible_distribution_release }}
+          Components: stable
+          Architectures: {{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}
+          Signed-By: /etc/apt/keyrings/docker.asc
+      when: ansible_os_family == "Debian"
+
+    - name: Install Docker (Debian)
+      apt:
+        name: [docker-ce, docker-ce-cli, containerd.io, docker-compose-plugin]
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+
+    # Common tasks
+    - name: Start and enable Docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create app directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy docker-compose.yml
+      copy:
+        src: "{{ playbook_dir }}/../docker-compose.yml"
+        dest: "{{ app_dir }}/docker-compose.yml"
+
+    - name: Copy migrations
+      copy:
+        src: "{{ playbook_dir }}/../migrations/"
+        dest: "{{ app_dir }}/migrations/"
+
+    - name: Deploy application
+      shell: docker compose up -d
+      args:
+        chdir: "{{ app_dir }}"
