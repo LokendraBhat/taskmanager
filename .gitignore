@@ -7,3 +7,5 @@ terraform/terraform.tfstate.backup
 terraform/.terraform.lock.hcl
 terraform/.terraform/
 monitoring/grafana-storage/
+terraform/vagrant/debian/.vagrant/
+terraform/vagrant/alma/.vagrant/
