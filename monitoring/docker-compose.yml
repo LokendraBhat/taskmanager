@@ -36,3 +36,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro  # For docker stdout logs
       - /var/log/nginx:/temp/logs:ro                  # From log directory
     command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+
+  blackbox_exporter:
+    image: quay.io/prometheus/blackbox-exporter:latest
+    container_name: blackbox_exporter
+    ports:
+      - "9115:9115"
+    volumes:
+      - ./blackbox-exporter:/config
+    command: ["--config.file=/config/blackbox.yml"]
+    restart: unless-stopped
+
+
