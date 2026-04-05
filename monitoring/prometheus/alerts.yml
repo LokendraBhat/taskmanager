@@ -22,13 +22,13 @@ groups:
           description: "CPU usage is above 80% for more than 2 minutes."
 
       - alert: HighMemoryUsage
-        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 20
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
         for: 2m
         labels:
           severity: warning
         annotations:
           summary: "High Memory usage on {{ $labels.instance }}"
-          description: "Memory usage is above 20%."
+          description: "Memory usage is above 80%."
 
       - alert: LowDiskSpace
         expr: (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"}) * 100 < 20
