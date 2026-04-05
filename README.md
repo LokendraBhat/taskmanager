@@ -219,11 +219,13 @@ Application running on :8080
 For detailed more detail logs visit: ./docs/
 
 ## Monitoring 
-### — Grafana, Prometheus, Loki, and Alloy (Promtail Alternative)
+### — Grafana, Prometheus, alertmanager, Loki, and Alloy (Promtail Alternative), blackbox-exporter
 
 > **Note:** Promtail reached end of life (EOL) on March 2, 2026.  
 > https://grafana.com/docs/loki/latest/send-data/promtail/  
 > So, I used **Alloy** to collect logs and forward them to **Loki**.
+
+> [Blackbox Exporter](https://github.com/prometheus/blackbox_exporter)
 
 
 ## 👨‍💻 Lokendra Bhat
