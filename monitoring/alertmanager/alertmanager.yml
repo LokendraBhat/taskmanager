@@ -10,5 +10,5 @@ route:
 receivers:
   - name: 'webhook_receiver'
     webhook_configs:
-      - url: 'http://192.168.56.1:5000/alerts'
+      - url: 'http://192.168.56.1:5000/alerts' # this is self hosted test python script for webhook receive
         send_resolved: true
