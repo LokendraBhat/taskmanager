@@ -13,7 +13,8 @@ A simple full-stack task management application built with **Go**, **PostgreSQL*
 * 🐘 PostgreSQL database with indexing
 * 🐳 Dockerized setup for easy deployment
 * 🌐 Simple frontend with HTML + Tailwind CSS
-* 🛠 Infrastructure automation using Terraform & Ansible (optional)
+* 🛠 Infrastructure automation using Terraform & Ansible
+* 💻 Monitoring Logs, System and Uptime
 
 ---
 
@@ -21,26 +22,53 @@ A simple full-stack task management application built with **Go**, **PostgreSQL*
 
 ```
 task-manager/
-│
-├── cmd/server/          # Application entrypoint
-├── internal/            # Core application logic
-│   ├── handlers/        # HTTP handlers
-│   ├── models/          # Data models
-│   ├── services/        # Business logic
-│   ├── repository/      # Database queries
-│   ├── middleware/      # Auth & session middleware
-│   └── config/          # Configuration
-│
-├── web/                 # Frontend
-│   ├── templates/       # HTML templates
-│   └── static/          # CSS/JS assets
-│
-├── migrations/          # SQL schema
-├── docker/              # Docker configs
-├── terraform/           # Infrastructure as code
-├── ansible/             # Server configuration & deployment
-├── .devcontainer/       # VS Code dev environment
-└── README.md
+.
+├── ansible
+│   ├── deploy.yml
+│   ├── inventory.yml
+│   ├── node_expoter.yml
+│   └── update-install.yml
+├── cmd
+│   └── server
+├── docker-compose.yml
+├── Dockerfile
+├── docs
+│   ├── ansible-task.log
+│   ├── images
+│   ├── nginx-with-ha.log
+│   └── terraform-task.log
+├── go.mod
+├── go.sum
+├── internal
+│   ├── config
+│   ├── handlers
+│   ├── middleware
+│   ├── models
+│   ├── repository
+│   └── services
+├── LICENSE
+├── migrations
+│   └── init.sql
+├── monitoring
+│   ├── alertmanager
+│   ├── alloy
+│   ├── blackbox-exporter
+│   ├── docker-compose.yml
+│   ├── grafana-storage
+│   ├── loki
+│   ├── prometheus
+│   └── webhook_receiver
+├── nginx.conf
+├── README.md
+├── terraform
+│   ├── main.tf
+│   ├── terraform.tf
+│   ├── terraform.tfstate
+│   ├── terraform.tfstate.backup
+│   ├── vagrant
+│   └── variable.tf
+└── web
+    └── templates
 ```
 
 ---
@@ -52,7 +80,8 @@ task-manager/
 * **Frontend:** HTML + Tailwind CSS
 * **Authentication:** bcrypt password hashing
 * **Containerization:** Docker & Docker Compose
-* **Infrastructure (Optional):** Terraform + Ansible
+* **Infrastructure:** Terraform + Ansible
+* **Monitoring:** Prometheus, Grafana, Loki, Alloy, Alertmanager, blackbox-exporter
 
 ---
 
@@ -68,6 +97,78 @@ task-manager/
 | POST   | `/task/update` | Update task       |
 | GET    | `/task/toggle` | Toggle completion |
 | GET    | `/task/delete` | Delete task       |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+* Docker & Docker Compose
+* Go 1.25 (for local development)
+* PostgreSQL 17 (or use Docker)
+
+### Using Docker (Recommended)
+
+```bash
+# Clone and navigate
+cd crud-api
+
+# Start the application
+docker-compose up -d
+
+# Application runs on http://localhost:8080
+```
+
+### Local Development
+
+```bash
+# Install dependencies
+go mod download
+
+# Set environment variables
+export DB_USER=postgres
+export DB_PASS=password
+export DB_HOST=localhost
+export DB_PORT=5432
+export DB_NAME=task_manager
+
+# Run migrations
+psql -U postgres -d task_manager -f migrations/init.sql
+
+# Start server
+go run cmd/server/main.go
+```
+
+---
+
+## 📋 Environment Variables
+
+```
+DB_USER=postgres
+DB_PASS=your_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=task_manager
+SERVER_PORT=8080
+```
+
+---
+
+## 📊 Monitoring
+
+Monitoring stack includes:
+* **Prometheus** - Metrics collection
+* **Grafana** - Visualization & dashboards
+* **Loki** - Log aggregation
+* **Alloy** - Flexible telemetry collector
+
+Access Grafana at `http://localhost:3000` (default: admin/admin)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) file for details.
 
 ---
 
