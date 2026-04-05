@@ -1,0 +1,7 @@
+services:
+  flask-alerts:
+    build: .
+    container_name: flask_alerts
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
