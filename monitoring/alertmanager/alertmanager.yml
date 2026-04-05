@@ -10,5 +10,5 @@ route:
 receivers:
   - name: 'webhook_receiver'
     webhook_configs:
-      - url: 'http://your-webhook-endpoint.local/alerts'
+      - url: 'http://192.168.56.1:5000/alerts'
         send_resolved: true
