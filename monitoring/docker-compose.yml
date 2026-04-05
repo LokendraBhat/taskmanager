@@ -47,4 +47,3 @@ services:
     command: ["--config.file=/config/blackbox.yml"]
     restart: unless-stopped
 
-
