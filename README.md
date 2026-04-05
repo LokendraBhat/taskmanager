@@ -180,7 +180,7 @@ Ref: [Debian](https://docs.docker.com/engine/install/debian/) and [AlmaLinux](ht
 ```bash
 cd ansible
 
-# Step 1 — install curl, ca-certificates, gnupg on target hosts
+# Step 1 — install curl, ca-certificates on target hosts
 ansible-playbook -i inventory.yml update-install.yml
 
 # Step 2 — install Docker, copy compose files, start the app
@@ -215,6 +215,16 @@ Application running on :8080
 | `deploy.yml` | apt + Docker GPG key | dnf + Docker CE repo |
 
 ---
+
+For detailed more detail logs visit: ./docs/
+
+## Monitoring 
+### — Grafana, Prometheus, Loki, and Alloy (Promtail Alternative)
+
+> **Note:** Promtail reached end of life (EOL) on March 2, 2026.  
+> https://grafana.com/docs/loki/latest/send-data/promtail/  
+> So, I used **Alloy** to collect logs and forward them to **Loki**.
+
 
 ## 👨‍💻 Lokendra Bhat
 
