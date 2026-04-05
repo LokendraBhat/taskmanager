@@ -1,0 +1,14 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "alma" do |alma|
+    alma.vm.box = "Almalinux/9"
+    alma.vm.hostname = "alma-node"
+    alma.vm.network "private_network", ip: "192.168.56.5"
+
+    alma.vm.provider "virtualbox" do |vb|
+      vb.name   = "alma-node"
+      vb.cpus   = 2
+      vb.memory = 2048
+    end
+  end
+
+end
