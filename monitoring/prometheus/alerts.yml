@@ -3,7 +3,7 @@ groups:
     rules:
       - alert: BlackboxTargetDown
         expr: probe_success == 0
-        for: 1m
+        for: 15s
         labels:
           severity: critical
         annotations:
@@ -13,17 +13,17 @@ groups:
   - name: system_alerts
     rules:
       - alert: HighCPUUsage
-        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
-        for: 2m
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+        for: 1m
         labels:
           severity: warning
         annotations:
           summary: "High CPU usage on {{ $labels.instance }}"
-          description: "CPU usage is above 80% for more than 2 minutes."
+          description: "CPU usage is above 80% for more than 1 minutes."
 
       - alert: HighMemoryUsage
         expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
-        for: 2m
+        for: 1m
         labels:
           severity: warning
         annotations:
@@ -32,20 +32,9 @@ groups:
 
       - alert: LowDiskSpace
         expr: (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"}) * 100 < 20
-        for: 2m
+        for: 1m
         labels:
           severity: critical
         annotations:
           summary: "Low disk space on {{ $labels.instance }}"
           description: "Disk space is below 20%."
-
-  - name: test_alert
-    rules:
-      - alert: TestWebhook
-        expr: vector(1)          # Always triggers
-        for: 1m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Test Webhook Alert"
-          description: "This is a test alert sent to webhook"

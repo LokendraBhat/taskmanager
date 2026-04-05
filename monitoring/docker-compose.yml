@@ -28,6 +28,8 @@ services:
   alertmanager:
     image: quay.io/prometheus/alertmanager:latest
     container_name: alertmanager
+    environment:
+      - TZ=Asia/Kathmandu
     ports:
       - "9093:9093"
     volumes:
