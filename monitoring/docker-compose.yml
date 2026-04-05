@@ -15,6 +15,7 @@ services:
     image: prom/prometheus:v3.3.0
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml 
     command:
       - --web.enable-remote-write-receiver
       - --config.file=/etc/prometheus/prometheus.yml
@@ -23,6 +24,18 @@ services:
     extra_hosts:
       - taskmanager.local.com:192.168.56.1
     restart: unless-stopped
+
+  alertmanager:
+    image: quay.io/prometheus/alertmanager:latest
+    container_name: alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    restart: unless-stopped
+
   loki:
     image: grafana/loki:latest
     volumes:
